@@ -1318,13 +1318,13 @@ const QuizApp = () => {
     }
   ];
 
-
+  let timerInterval;
   useEffect(() => {
   
   }, []);
  
   useEffect(() => {
-    let timerInterval;
+   
     if(count>=0){
       timerInterval = setInterval(function() {
        setCount(count-1);
@@ -1352,7 +1352,8 @@ const QuizApp = () => {
     document.querySelector("span").style.display = "block";
     document.querySelector("p").style.display = "block";
     let shuffled = all_countries.sort(() => 0.5 - Math.random());
-    quizQuestions.current = shuffled.slice(0, 10); // here we get 3 other random answers;
+    quizQuestions.current = shuffled.slice(0, 10); // here we get 10 other random answers for this round;
+    console.log('this is the 10 countries we get for this round ', quizQuestions.current)
   setCount(20);
     displayQuestion();
     
@@ -1376,17 +1377,25 @@ const QuizApp = () => {
     goodAnswer.current = current_one;
 
   }
+  const remove_highlight = () => {
+
+    let all_answer = document.querySelectorAll('.answer-button');
+    if (all_answer) {
+      all_answer.forEach((elm)=>
+        elm.classList.remove('right_answer'));  
+    }
+
+}
 
 
   const check_answers = (answer, e) => {
-  //  let button= document.getElementsByClassName("answer-button");
-  //  button.foreach((elm,ind)=>{
-  //   if()
-  //  })
+    let button= document.getElementsByClassName("answer-button");
+console.log('this is the current question we are checking ', quizQuestions[questionIndex.current].country)
 
 
     if (answers[answer].country == goodAnswer.current.country) {
       score.current = score.current + 1;
+button[answer].classList.add('right_answer');
     }
 
     questionIndex.current = questionIndex.current + 1;
@@ -1396,7 +1405,7 @@ const QuizApp = () => {
       setTimeout(() => {
         setCount(20);
         displayQuestion();
-      }, 600);
+      }, 500);
   
     
     } else {
@@ -1407,12 +1416,13 @@ const QuizApp = () => {
   }
 
   const reset_game = () => {
+    remove_highlight();
     document.getElementById("start-button").style.display = "block";
     document.getElementById("all_answers").style.display = "none";
     document.querySelector("span").style.display = "none";
     score.current = 0;
     setCurrentUrl('http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg');
-    scorePercentage.current = 0;
+
   }
 
 
@@ -1445,8 +1455,8 @@ const QuizApp = () => {
 
         <div className="modal-content">
           <div className="modal-body">
-            <h2>Quiz Completed!</h2>
-            <p>Your Score: {score.current} out of 10</p>
+            <h2>Look your score!</h2>
+            <h4>Your Score: {score.current} out of 10</h4>
           </div>
           <div className="modal-footer d-flex justify-content-center">
             <button type="button" className="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() => {

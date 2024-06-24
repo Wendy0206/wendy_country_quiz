@@ -110,7 +110,7 @@ button {
 
 
 .wrong_answer{
-  animation: blink 1.0s linear ;
+  animation: blink 1.5s linear ;
   background-color: red; 
 }
 

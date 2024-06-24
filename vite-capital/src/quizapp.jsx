@@ -1317,7 +1317,7 @@ const QuizApp = () => {
       "code": "uk"
     }
   ];
-
+let good_index=0;
   let timerInterval;
   useEffect(() => {
 
@@ -1367,7 +1367,7 @@ const QuizApp = () => {
     document.querySelector("p").style.display = "block";
     let shuffled = all_countries.sort(() => 0.5 - Math.random());
     quizQuestions.current = shuffled.slice(0, 10); // here we get 10 other random answers for this round;
-    console.log('this is the 10 countries we get for this round ', quizQuestions.current)
+  
     setCount(20);
     displayQuestion();
 
@@ -1384,14 +1384,10 @@ const QuizApp = () => {
     const shuffled = clone_array.sort(() => 0.5 - Math.random());
 
     let each_option = shuffled.slice(0, 3); // here we get 3 other random answers;
-    console.log('this is the 3 random we get : ', each_option);
+    each_option.splice((each_option.length + 1) * Math.random() | 0, 0, current_one);
 
-    each_option.splice((each_option.length + 1) * Math.random() | 0, 0, current_one)
     setAnswers(each_option);
-
-    //  const shuffledArray = each_option.sort((a, b) => 0.5 - Math.random());
-    // setAnswers(shuffledArray);
-
+    good_index= each_option.indexOf(current_one.country);
     goodAnswer.current = current_one.country;
 
   }
@@ -1406,6 +1402,20 @@ const QuizApp = () => {
     }
     else {
       button[answer].classList.add('wrong_answer');
+
+      if(button[0].innerText==goodAnswer.current){
+        button[0].classList.add('right_answer');
+      }
+      else if(button[1].innerText==goodAnswer.current){
+        button[1].classList.add('right_answer');
+      }
+      else if(button[2].innerText==goodAnswer.current){
+        button[2].classList.add('right_answer');
+      }
+       else if(button[3].innerText==goodAnswer.current){
+        button[3].classList.add('right_answer');
+      }
+
     }
     questionIndex.current = questionIndex.current + 1;
 
@@ -1414,10 +1424,11 @@ const QuizApp = () => {
       setTimeout(() => {
         setCount(20);
         displayQuestion();
-      }, 500);
+      }, 1000);
 
 
     } else {
+      remove_highlight();
       clearInterval(timerInterval);
       const dialog = document.getElementById('modal_dialog');
       dialog.showModal();

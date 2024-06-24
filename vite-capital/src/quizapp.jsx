@@ -1360,21 +1360,21 @@ const QuizApp = () => {
   }
 
   function displayQuestion() {
-  
-  
-    let current_one = quizQuestions.current[questionIndex.current].flag;
-    
-    setCurrentUrl(current_one);
+  console.log(' this is the current index before we check it : ', questionIndex.current);
+
+    let current_one = quizQuestions.current[questionIndex.current];  
+    setCurrentUrl(current_one.flag);
     let clone_array = quizQuestions.current;
 
     const shuffled = clone_array.sort(() => 0.5 - Math.random());
 
-    let selected = shuffled.slice(0, 4); // here we get 3 other random answers;
+    let each_option  = shuffled.slice(0, 3); // here we get 3 other random answers;
+console.log('this si the 3 random we get : ', each_option );
+    each_option.push(current_one);
 
-    let each_option = [current_one.country, ...selected];
     const shuffledArray = each_option.sort((a, b) => 0.5 - Math.random());
     setAnswers(shuffledArray);
-    goodAnswer.current = current_one;
+    goodAnswer.current = current_one.country;
 
   }
   const remove_highlight = () => {
@@ -1388,10 +1388,8 @@ const QuizApp = () => {
 }
 
 
-  const check_answers = (answer, e) => {
+  const check_answers = (answer) => {
     let button= document.getElementsByClassName("answer-button");
-console.log('this is the current question we are checking ', quizQuestions[questionIndex.current].country)
-
 
     if (answers[answer].country == goodAnswer.current.country) {
       score.current = score.current + 1;
@@ -1436,10 +1434,10 @@ button[answer].classList.add('right_answer');
         <p id="question-text">Hey! Which country is this?</p>
         <div id='all_answers'>
           <div id="answer-buttons">
-            <button className='answer-button' onClick={(e) => check_answers(0, e)}>{answers[0].country}</button>
-            <button className='answer-button' onClick={(e) => check_answers(1, e)}>{answers[1].country}</button>
-            <button className='answer-button' onClick={(e) => check_answers(2, e)}>{answers[2].country}</button>
-            <button className='answer-button' onClick={(e) => check_answers(3, e)}>{answers[3].country}</button>
+            <button className='answer-button' onClick={() => check_answers(0)}>{answers[0].country}</button>
+            <button className='answer-button' onClick={() => check_answers(1)}>{answers[1].country}</button>
+            <button className='answer-button' onClick={() => check_answers(2)}>{answers[2].country}</button>
+            <button className='answer-button' onClick={() => check_answers(3)}>{answers[3].country}</button>
           </div>
         </div>
       </div>

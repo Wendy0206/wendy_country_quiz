@@ -109,6 +109,12 @@ button {
 }
 
 
+.wrong_answer{
+  animation: blink 1.0s linear ;
+  background-color: red; 
+}
+
+
 @keyframes blink {
   25% { 
  opacity: 0.5;

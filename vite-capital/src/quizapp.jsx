@@ -12,7 +12,7 @@ const QuizApp = () => {
   const [currentUrl, setCurrentUrl] = useState('http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg');
 
 
-  const all_countries=[
+  const all_countries = [
     {
       "flag": "https://twemoji.maxcdn.com/2/svg/1f1e6-1f1e8.svg",
       "country": "Ascension Island",
@@ -1320,30 +1320,44 @@ const QuizApp = () => {
 
   let timerInterval;
   useEffect(() => {
-  
+
   }, []);
- 
+
   useEffect(() => {
-   
-    if(count>=0){
-      timerInterval = setInterval(function() {
-       setCount(count-1);
-    
+
+    if (count >= 0) {
+      timerInterval = setInterval(function () {
+        setCount(count - 1);
+
         // End the quiz if time runs out
-        if (count==1) {
-        
-         displayQuestion();
-         setCount(20);
+        if (count == 1) {
+
+          displayQuestion();
+          setCount(20);
         }
       }, 1000);
 
       return () => {
         clearInterval(timerInterval);
-     
+
       }
     }
   }, [count]);
- 
+
+  const remove_highlight = () => {
+
+    let all_answer = document.querySelectorAll('.answer-button');
+    if (all_answer) {
+      all_answer.forEach((elm) =>
+        elm.classList.remove('right_answer'));
+    }
+
+    if (all_answer) {
+      all_answer.forEach((elm) =>
+        elm.classList.remove('wrong_answer'));
+    }
+
+  }
 
   const startQuiz = () => {
 
@@ -1354,63 +1368,55 @@ const QuizApp = () => {
     let shuffled = all_countries.sort(() => 0.5 - Math.random());
     quizQuestions.current = shuffled.slice(0, 10); // here we get 10 other random answers for this round;
     console.log('this is the 10 countries we get for this round ', quizQuestions.current)
-  setCount(20);
+    setCount(20);
     displayQuestion();
-    
+
   }
 
   function displayQuestion() {
-  console.log(' this is the current index before we check it : ', questionIndex.current);
 
-    let current_one = quizQuestions.current[questionIndex.current];  
+    remove_highlight();
+    let current_one = quizQuestions.current[questionIndex.current];
 
     setCurrentUrl(current_one.flag);
     let clone_array = [...quizQuestions.current];
-clone_array.shift();
+    clone_array.shift();
     const shuffled = clone_array.sort(() => 0.5 - Math.random());
-  
-    let each_option  = shuffled.slice(0, 3); // here we get 3 other random answers;
-    console.log('this is the 3 random we get : ', each_option );
 
-each_option.splice((each_option.length+1) * Math.random() | 0, 0, current_one)
-setAnswers(each_option);
+    let each_option = shuffled.slice(0, 3); // here we get 3 other random answers;
+    console.log('this is the 3 random we get : ', each_option);
 
-  //  const shuffledArray = each_option.sort((a, b) => 0.5 - Math.random());
+    each_option.splice((each_option.length + 1) * Math.random() | 0, 0, current_one)
+    setAnswers(each_option);
+
+    //  const shuffledArray = each_option.sort((a, b) => 0.5 - Math.random());
     // setAnswers(shuffledArray);
 
     goodAnswer.current = current_one.country;
 
   }
-  const remove_highlight = () => {
-
-    let all_answer = document.querySelectorAll('.answer-button');
-    if (all_answer) {
-      all_answer.forEach((elm)=>
-        elm.classList.remove('right_answer'));  
-    }
-
-}
 
 
   const check_answers = (answer) => {
-    let button= document.getElementsByClassName("answer-button");
+    let button = document.getElementsByClassName("answer-button");
 
-    if (answers[answer].country == goodAnswer.current.country) {
-      console.log('that is the right answer ')
+    if (answers[answer].country == goodAnswer.current) {
       score.current = score.current + 1;
-button[answer].classList.add('right_answer');
+      button[answer].classList.add('right_answer');
     }
-
+    else {
+      button[answer].classList.add('wrong_answer');
+    }
     questionIndex.current = questionIndex.current + 1;
 
     if (questionIndex.current <= 9) {
-     
+
       setTimeout(() => {
         setCount(20);
         displayQuestion();
       }, 500);
-  
-    
+
+
     } else {
       clearInterval(timerInterval);
       const dialog = document.getElementById('modal_dialog');
@@ -1432,49 +1438,49 @@ button[answer].classList.add('right_answer');
   return (
     <div className='container_div'>
 
-    <div className="quiz-container">
-      <h3>History</h3>
-      <img alt="United States" src={currentUrl} />
-      <div id="question-container">
-        <p id="question-text">Hey! Which country is this?</p>
-        <div id='all_answers'>
-          <div id="answer-buttons">
-            <button className='answer-button' onClick={() => check_answers(0)}>{answers[0].country}</button>
-            <button className='answer-button' onClick={() => check_answers(1)}>{answers[1].country}</button>
-            <button className='answer-button' onClick={() => check_answers(2)}>{answers[2].country}</button>
-            <button className='answer-button' onClick={() => check_answers(3)}>{answers[3].country}</button>
+      <div className="quiz-container">
+        <h3>History</h3>
+        <img alt="United States" src={currentUrl} />
+        <div id="question-container">
+          <p id="question-text">Hey! Which country is this?</p>
+          <div id='all_answers'>
+            <div id="answer-buttons">
+              <button className='answer-button' onClick={() => check_answers(0)}>{answers[0].country}</button>
+              <button className='answer-button' onClick={() => check_answers(1)}>{answers[1].country}</button>
+              <button className='answer-button' onClick={() => check_answers(2)}>{answers[2].country}</button>
+              <button className='answer-button' onClick={() => check_answers(3)}>{answers[3].country}</button>
+            </div>
           </div>
         </div>
+        <div id="controls-container">
+          <button id="start-button" onClick={() => startQuiz()}>Start Quiz</button>
+          <div id="timer-container">
+            <span id="timer-text">Time Left: {count}</span>
+          </div>
+        </div>
+
+
+        <dialog id="modal_dialog" className="rounded dialog_margin">
+
+          <div className="modal-content">
+            <div className="modal-body">
+              <h2>Look your score!</h2>
+              <h4>Your Score: {score.current} out of 10</h4>
+            </div>
+            <div className="modal-footer d-flex justify-content-center">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() => {
+
+                const dialog = document.getElementById('modal_dialog');
+
+                dialog.close();
+                reset_game();
+              }}>Close</button>
+            </div>
+
+          </div>
+
+        </dialog>
       </div>
-      <div id="controls-container">
-        <button id="start-button" onClick={() => startQuiz()}>Start Quiz</button>
-        <div id="timer-container">
-          <span id="timer-text">Time Left: {count}</span>
-        </div>
-      </div>
-
-
-      <dialog id="modal_dialog" className="rounded dialog_margin">
-
-        <div className="modal-content">
-          <div className="modal-body">
-            <h2>Look your score!</h2>
-            <h4>Your Score: {score.current} out of 10</h4>
-          </div>
-          <div className="modal-footer d-flex justify-content-center">
-            <button type="button" className="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() => {
-
-              const dialog = document.getElementById('modal_dialog');
-
-              dialog.close();
-              reset_game();
-            }}>Close</button>
-          </div>
-
-        </div>
-
-      </dialog>
-    </div>
     </div>
   )
 };

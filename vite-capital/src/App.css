@@ -1,42 +1,94 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: black;
+}
+
+.myApp{
+  width: 100%;
+  position: relative;
+}
+
+.quiz-container {
+ position: relative;
+ width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: auto;
+}
+img{
+  width: 100%;
+}
+
+h4 {
   text-align: center;
+  font-size:25px ;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+#question-container {
+  margin-bottom: 20px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#question-text {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+p{
+  font-size: 25px;
+  font-weight: 600;
 }
 
-.card {
-  padding: 2em;
+
+.dialog_margin{
+	margin: auto;
+  background-color: white;
+  color: black;
+	padding: 15px 15px 15px 15px;
+	border-radius:  5px solid black;
 }
 
-.read-the-docs {
-  color: #888;
+#answer-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+#all_answers{
+  display: none;
+}
+
+button {
+  height: 40px;
+  font-size: 16px;
+  background-color: #eaeaea;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+#controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#timer-container {
+  display: flex;
+  align-items: center;
+}
+
+#timer-text {
+  font-size: 14px;
+}
+
+#timer {
+  font-weight: bold;
+  margin-left: 5px;
 }

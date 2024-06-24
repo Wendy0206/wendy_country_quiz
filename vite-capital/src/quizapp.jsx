@@ -1363,17 +1363,21 @@ const QuizApp = () => {
   console.log(' this is the current index before we check it : ', questionIndex.current);
 
     let current_one = quizQuestions.current[questionIndex.current];  
+
     setCurrentUrl(current_one.flag);
-    let clone_array = quizQuestions.current;
-
+    let clone_array = [...quizQuestions.current];
+clone_array.shift();
     const shuffled = clone_array.sort(() => 0.5 - Math.random());
-
+  
     let each_option  = shuffled.slice(0, 3); // here we get 3 other random answers;
-console.log('this si the 3 random we get : ', each_option );
-    each_option.push(current_one);
+    console.log('this is the 3 random we get : ', each_option );
 
-    const shuffledArray = each_option.sort((a, b) => 0.5 - Math.random());
-    setAnswers(shuffledArray);
+each_option.splice((each_option.length+1) * Math.random() | 0, 0, current_one)
+setAnswers(each_option);
+
+  //  const shuffledArray = each_option.sort((a, b) => 0.5 - Math.random());
+    // setAnswers(shuffledArray);
+
     goodAnswer.current = current_one.country;
 
   }
@@ -1392,6 +1396,7 @@ console.log('this si the 3 random we get : ', each_option );
     let button= document.getElementsByClassName("answer-button");
 
     if (answers[answer].country == goodAnswer.current.country) {
+      console.log('that is the right answer ')
       score.current = score.current + 1;
 button[answer].classList.add('right_answer');
     }

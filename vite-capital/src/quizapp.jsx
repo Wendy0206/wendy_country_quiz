@@ -1317,11 +1317,10 @@ const QuizApp = () => {
       "code": "uk"
     }
   ];
-let good_index=0;
-  let timerInterval;
-  useEffect(() => {
 
-  }, []);
+
+  let timerInterval;
+  
 
   useEffect(() => {
 
@@ -1366,7 +1365,7 @@ let good_index=0;
     document.querySelector("p").style.display = "block";
     let shuffled = all_countries.sort(() => 0.5 - Math.random());
     quizQuestions.current = shuffled.slice(0, 10); // here we get 10 other random answers for this round;
-    
+   // console.log('this si the 10 we get for this round : ', quizQuestions.current)
     setCount(20);
     displayQuestion();
 
@@ -1379,14 +1378,14 @@ let good_index=0;
 
     setCurrentUrl(current_one.flag);
     let clone_array = [...quizQuestions.current];
-    clone_array.shift();
+    clone_array.splice(questionIndex.current,1);
     const shuffled = clone_array.sort(() => 0.5 - Math.random());
 
-    let each_option = shuffled.slice(0, 3); // here we get 3 other random answers;
-    
-    let next= [...each_option];
+    let each_option = shuffled.splice(0, 3); // here we get 3 other random answers;
+    //console.log('the 3 random we alternative options we get ', each_option)
+    let next=[...each_option];
     next.splice((each_option.length + 1) * Math.random() | 0, 0, current_one);
-
+//console.log('this si the final choices we got : ', next)
 
     each_option.splice((each_option.length + 1) * Math.random() | 0, 0, current_one);
     setAnswers(each_option);
@@ -1431,10 +1430,13 @@ let good_index=0;
 
 
     } else {
-      remove_highlight();
+      setTimeout(() => {
+        remove_highlight();
       clearInterval(timerInterval);
       const dialog = document.getElementById('modal_dialog');
       dialog.showModal();
+      }, 1000);
+    
     }
   }
 

@@ -1360,14 +1360,13 @@ let good_index=0;
   }
 
   const startQuiz = () => {
-
     document.getElementById("start-button").style.display = "none";
     document.getElementById("all_answers").style.display = "block";
     document.querySelector("span").style.display = "block";
     document.querySelector("p").style.display = "block";
     let shuffled = all_countries.sort(() => 0.5 - Math.random());
     quizQuestions.current = shuffled.slice(0, 10); // here we get 10 other random answers for this round;
-  
+    
     setCount(20);
     displayQuestion();
 
@@ -1384,10 +1383,14 @@ let good_index=0;
     const shuffled = clone_array.sort(() => 0.5 - Math.random());
 
     let each_option = shuffled.slice(0, 3); // here we get 3 other random answers;
-    each_option.splice((each_option.length + 1) * Math.random() | 0, 0, current_one);
+    
+    let next= [...each_option];
+    next.splice((each_option.length + 1) * Math.random() | 0, 0, current_one);
 
+
+    each_option.splice((each_option.length + 1) * Math.random() | 0, 0, current_one);
     setAnswers(each_option);
-    good_index= each_option.indexOf(current_one.country);
+
     goodAnswer.current = current_one.country;
 
   }

@@ -1431,8 +1431,7 @@ const QuizApp = () => {
 
     } else {
       setTimeout(() => {
-        remove_highlight();
-      clearInterval(timerInterval);
+        clearInterval(timerInterval);
       const dialog = document.getElementById('modal_dialog');
       dialog.showModal();
       }, 1000);
@@ -1441,11 +1440,16 @@ const QuizApp = () => {
   }
 
   const reset_game = () => {
+    const dialog = document.getElementById('modal_dialog');
+
+    dialog.close();
     remove_highlight();
+    clearInterval(timerInterval);
     document.getElementById("start-button").style.display = "block";
     document.getElementById("all_answers").style.display = "none";
     document.querySelector("span").style.display = "none";
     score.current = 0;
+    questionIndex.current=0;
     setCurrentUrl('http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg');
 
   }
@@ -1484,13 +1488,7 @@ const QuizApp = () => {
               <h4>Your Score: {score.current} out of 10</h4>
             </div>
             <div className="modal-footer d-flex justify-content-center">
-              <button type="button" className="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() => {
-
-                const dialog = document.getElementById('modal_dialog');
-
-                dialog.close();
-                reset_game();
-              }}>Close</button>
+              <button type="button" className="btn btn-secondary" data-dismiss="modal" style={{ fontFamily: "arial" }} onClick={() =>reset_game()}>Close</button>
             </div>
 
           </div>

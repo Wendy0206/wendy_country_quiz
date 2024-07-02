@@ -4,15 +4,21 @@
   position: relative;
 }
 
+
+#start-button{
+  margin: auto;
+}
+
+
 .quiz-container {
  position: relative;
- width: 100%;
+ width: 95%;
   background-color: #fff;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin: auto;
-  height: 65vh;
+  height: fit-content;
   color: black;
 }
 
@@ -61,6 +67,7 @@ p{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 10px;
+  
 }
 #all_answers{
   display: none;

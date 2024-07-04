@@ -40,31 +40,28 @@ const QuizApp = () => {
     {name:"Montana" , flag: "https://flagpedia.net/data/us/w702/mt.webp" },
     {name:"Nebraska" , flag: "https://flagpedia.net/data/us/w702/ne.webp" },
     {name:"Nevada" , flag: "https://flagpedia.net/data/us/w702/nv.webp" },
-    {name:" New Hampshire" , flag: "https://flagpedia.net/data/us/w702/nh.webp" },
-    {name:" New Jersey" , flag: "https://flagpedia.net/data/us/w702/nj.webp" },
-    {name:" New York" , flag: "https://flagpedia.net/data/us/w702/ny.webp" },
-    {name:" North Carolina" , flag: "https://flagpedia.net/data/us/w702/nc.webp" },
-    {name:" Ohio" , flag: "https://flagpedia.net/data/us/w702/oh.webp" },
-    {name:" Oklahoma" , flag: "https://flagpedia.net/data/us/w702/ok.webp" },
-    {name:" Oregon" , flag: "https://flagpedia.net/data/us/w702/or.webp" },
-    {name:"  Pennsylvania" , flag: "https://flagpedia.net/data/us/w702/pa.webp" },
-    {name:" Rhode Island" , flag: "https://flagpedia.net/data/us/w702/ri.webp" },
-    {name:" South Carolina" , flag: "https://flagpedia.net/data/us/w702/sc.webp" },
-    {name:"  South Dakota" , flag: "https://flagpedia.net/data/us/w702/sd.webp" },
-    {name:" Tennessee" , flag: "https://flagpedia.net/data/us/w702/tn.webp" },
+    {name:"New Hampshire" , flag: "https://flagpedia.net/data/us/w702/nh.webp" },
+    {name:"New Jersey" , flag: "https://flagpedia.net/data/us/w702/nj.webp" },
+    {name:"New York" , flag: "https://flagpedia.net/data/us/w702/ny.webp" },
+    {name:"North Carolina" , flag: "https://flagpedia.net/data/us/w702/nc.webp" },
+    {name:"Ohio" , flag: "https://flagpedia.net/data/us/w702/oh.webp" },
+    {name:"Oklahoma" , flag: "https://flagpedia.net/data/us/w702/ok.webp" },
+    {name:"Oregon" , flag: "https://flagpedia.net/data/us/w702/or.webp" },
+    {name:"Pennsylvania" , flag: "https://flagpedia.net/data/us/w702/pa.webp" },
+    {name:"Rhode Island" , flag: "https://flagpedia.net/data/us/w702/ri.webp" },
+    {name:"South Carolina" , flag: "https://flagpedia.net/data/us/w702/sc.webp" },
+    {name:"South Dakota" , flag: "https://flagpedia.net/data/us/w702/sd.webp" },
+    {name:"Tennessee" , flag: "https://flagpedia.net/data/us/w702/tn.webp" },
     {name:"Texas" , flag: "https://flagpedia.net/data/us/w702/tx.webp" },
-    {name:" Utah" , flag: "https://flagpedia.net/data/us/w702/ut.webp" },
-    {name:" Vermont" , flag: "https://flagpedia.net/data/us/w702/vt.webp" },
-    {name:" Virginia" , flag: "https://flagpedia.net/data/us/w702/va.webp" },
-    {name:" Washington" , flag: "https://flagpedia.net/data/us/w702/wa.webp" },
-    {name:" West Virginia" , flag: "https://flagpedia.net/data/us/w702/wv.webp" },
-    {name:" Wisconsin" , flag: "https://flagpedia.net/data/us/w702/wi.webp" },
-    {name:" West Virginia" , flag: "https://flagpedia.net/data/us/w702/wy.webp" }
+    {name:"Utah" , flag: "https://flagpedia.net/data/us/w702/ut.webp" },
+    {name:"Vermont" , flag: "https://flagpedia.net/data/us/w702/vt.webp" },
+    {name:"Virginia" , flag: "https://flagpedia.net/data/us/w702/va.webp" },
+    {name:"Washington" , flag: "https://flagpedia.net/data/us/w702/wa.webp" },
+    {name:"West Virginia" , flag: "https://flagpedia.net/data/us/w702/wv.webp" },
+    {name:"Wisconsin" , flag: "https://flagpedia.net/data/us/w702/wi.webp" },
+    {name:"Wyoming" , flag: "https://flagpedia.net/data/us/w702/wy.webp" }
     ];
     
-    
-
-
 
   let timerInterval;
   
@@ -110,21 +107,22 @@ const QuizApp = () => {
     document.getElementById("all_answers").style.display = "block";
     document.querySelector("span").style.display = "block";
     document.querySelector("p").style.display = "block";
-    
-quizQuestions.current= [all_countries[Math.floor(Math.random()*5)],all_countries[Math.floor(Math.random()*5)+5],
+    quizQuestions.current 
+   
+let clone_array = [all_countries[Math.floor(Math.random()*5)],all_countries[Math.floor(Math.random()*5)+5],
 all_countries[Math.floor(Math.random()*5)+10],all_countries[Math.floor(Math.random()*5)+15],
 all_countries[Math.floor(Math.random()*5)+20],all_countries[Math.floor(Math.random()*5)+25],
 all_countries[Math.floor(Math.random()*5)+30],all_countries[Math.floor(Math.random()*5)+35],
 all_countries[Math.floor(Math.random()*5)+40],all_countries[Math.floor(Math.random()*4)+45]];
+ quizQuestions.current= clone_array.sort(() => 0.5 - Math.random());
 
-   // console.log('this si the 10 we get for this round : ', quizQuestions.current)
     setCount(20);
     displayQuestion();
 
   }
 
   function displayQuestion() {
-
+  
     remove_highlight();
     let current_one = quizQuestions.current[questionIndex.current];
 
@@ -135,14 +133,11 @@ all_countries[Math.floor(Math.random()*5)+40],all_countries[Math.floor(Math.rand
     const shuffled = clone_array.sort(() => 0.5 - Math.random());
    
     let each_option = shuffled.splice(0, 3); // here we get 3 other random answers;
-   // console.log('the 3 random we alternative options we get ', each_option)
     let next=[...each_option];
     next.splice((each_option.length + 1) * Math.random() | 0, 0, current_one);
-//console.log('this is the final choices we got : ', next)
 
     each_option.splice((each_option.length + 1) * Math.random() | 0, 0, current_one);
     setAnswers(each_option);
-  //  console.log('this is the good answer we got : '+ current_one.name);
     goodAnswer.current = current_one.name;
 
   }
@@ -157,18 +152,17 @@ all_countries[Math.floor(Math.random()*5)+40],all_countries[Math.floor(Math.rand
     }
     else {
       button[answer].classList.add('wrong_answer');
-
-      if(button[0].innerText==goodAnswer.current){
-        button[0].classList.add('right_answer');
+        if(button[0].innerText==goodAnswer.current){
+           button[0].classList.add('right_answer');
       }
       else if(button[1].innerText==goodAnswer.current){
-        button[1].classList.add('right_answer');
+          button[1].classList.add('right_answer');
       }
       else if(button[2].innerText==goodAnswer.current){
-        button[2].classList.add('right_answer');
+         button[2].classList.add('right_answer');
       }
        else if(button[3].innerText==goodAnswer.current){
-        button[3].classList.add('right_answer');
+          button[3].classList.add('right_answer');
       }
 
     }
@@ -203,7 +197,8 @@ all_countries[Math.floor(Math.random()*5)+40],all_countries[Math.floor(Math.rand
     document.querySelector("span").style.display = "none";
     score.current = 0;
     questionIndex.current=0;
-    setCurrentUrl('http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg');
+    quizQuestions.current=[];
+    setCurrentUrl('https://flagpedia.net/data/us/w702/tx.webp');
 
   }
 

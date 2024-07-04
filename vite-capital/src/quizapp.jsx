@@ -232,7 +232,7 @@ all_countries[Math.floor(Math.random()*5)+40],all_countries[Math.floor(Math.rand
 
           <div className="modal-content">
             <div className="modal-body">
-              <h2>Look your score!</h2>
+              <h2>US States Quiz</h2>
               <h4>Your Score: {score.current} out of 10</h4>
             </div>
             <div className="modal-footer d-flex justify-content-center">

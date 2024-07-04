@@ -228,7 +228,7 @@ all_countries[Math.floor(Math.random()*5)+40],all_countries[Math.floor(Math.rand
         </div>
 
 
-        <dialog id="modal_dialog" className="rounded dialog_margin">
+        <dialog id="modal_dialog" className="rounded dialog_margin ">
 
           <div className="modal-content">
             <div className="modal-body">

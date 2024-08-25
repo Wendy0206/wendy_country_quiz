@@ -9,7 +9,7 @@ const QuizApp = () => {
   const quizQuestions = useRef([]);
   const [count, setCount] = useState(null);
   const [answers, setAnswers] = useState([]);
-  const [currentUrl, setCurrentUrl] = useState('https://flagpedia.net/data/us/w702/al.webp');
+  const [currentUrl, setCurrentUrl] = useState('https://flagpedia.net/data/us/w702/tx.webp');
 const flagRootUrl='https://flagpedia.net/data/us/w702/';
 
   const all_states = [
